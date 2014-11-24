@@ -37,7 +37,8 @@
         scope: {
           clipCopy: '&',
           clipClick: '&',
-          clipClickFallback: '&'
+          clipClickFallback: '&',
+          clipIsReady: '='
         },
         restrict: 'A',
         link: function (scope, element, attrs) {
@@ -62,7 +63,8 @@
             };
           }
           client.on( 'ready', function(readyEvent) {
-
+            scope.clipIsReady = true;
+            
             client.on('copy', function (event) {
               var clipboard = event.clipboardData;
               clipboard.setData('text/plain', scope.$eval(scope.clipCopy));
